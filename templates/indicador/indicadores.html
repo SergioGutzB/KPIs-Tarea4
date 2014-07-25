@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} Lista de Indicadores - KPIs {% endblock %}
+{%block content %}
+	<div id="tabla_indicadores" class="col-md-12">
+	{% if indicadores %}
+
+	    <table class="table table-striped table-condensed"> 
+	    	<thead>
+	                <tr>
+	                  <th>Nombre Indicador</th>
+	                  <th>Descripción del Concepto</th>
+	                  <th>Descripción de la Operación</th>
+	                  <th>Otro</th>
+	                </tr>
+	        </thead>
+	    {% for i in indicadores %}
+	     	<tbody>
+	     		<tr id="tr{{i.id}}">
+					<td>{{ i.Nombre }}</td>
+					<td>{{ i.Descripcion_Concepto }}</td>
+					<td>{{ i.Descripcion_Operacion }}</td>
+					<td>{{ i.Otro}}</td>
+					<td><a class="btn" href="/indicador/{{i.id}}/"><span class="glyphicon glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+			</tbody>
+		{% endfor %}
+	    </table>
+		
+	{% else %}
+		<h2>No existen indicadores activos a la venta :( </h2>
+	{% endif %}
+	<br>
+	<hr>
+	{% if indicadores %}
+	    <div class="paginador">
+	    <ul class="pagination">
+			<li><a href="{% url 'indicadores' 1 %}">&laquo;</a></li>
+		{% if indicadores.has_previous %}
+			<li><a href="{% url 'indicadores' indicadores.previous_page_number  %}/"> Prev </a></li>
+		{% else %}
+			<li><a href="#"> Prev </a></li>
+		{% endif %}
+		{% if indicadores.has_next %}
+			<li><a href="{% url 'indicadores' indicadores.next_page_number %}/"> Next </a></li>
+		{% else %}
+			<li><a href="#"> Next </a></li>
+		{% endif %}
+			<li><a href="{% url 'indicadores' indicadores.paginator.num_pages %} ">&raquo;</a></li>
+		</ul>
+		<h6>Página {{ indicadores.number }} de {{ indicadores.paginator.num_pages }}</h6>
+		</div>
+		
+	{% endif %}
+	</div>
+	
+{% endblock %}
+
+<ul >

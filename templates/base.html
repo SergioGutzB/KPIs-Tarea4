@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}"/>
+    <script type="text/javascript" src="{% static "js/jquery.js"%}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.2.0-dist/css/bootstrap.css" %}"/>
+    <script type="text/javascript" src="{% static "bootstrap-3.2.0-dist/js/bootstrap.js" %}" ></script>
+</head>
+<body>
+	<header>
+    	<h1>KPIs - INDICADORES</h1>
+    </header>
+    <nav id="navegador">
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'indicadores' 1 %} ">Indicadores</a></li>
+            <li><a href="{% url 'insertar' %}">Insertar</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+        
+
+    </nav>
+    <div class="contenido row">
+        <div class="col-lg-12">
+    	{% block content %}{% endblock %}
+        </div>
+    </div>
+    <footer>
+	    {% block footer %}
+	    {% endblock %}
+    </footer>
+</body>
+</html>
